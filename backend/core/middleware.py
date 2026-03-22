@@ -1,4 +1,7 @@
+import logging
 from .models import AcessoLog
+
+logger = logging.getLogger(__name__)
 
 
 class AcessoLogMiddleware:
@@ -20,7 +23,7 @@ class AcessoLogMiddleware:
                     pagina_acessada=request.path,
                     metodo_http=request.method,
                 )
-            except Exception:
-                pass
+            except Exception as e:
+                logger.warning("Erro ao registrar log de acesso: %s", e)
 
         return response

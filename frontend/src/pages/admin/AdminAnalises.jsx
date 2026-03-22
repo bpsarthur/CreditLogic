@@ -1,29 +1,47 @@
 import { useState, useEffect } from 'react';
 import { adminAnalises } from '../../services/api';
 
+function getPageNumbers(current, total) {
+  const pages = new Set([1, total]);
+  for (let i = Math.max(2, current - 2); i <= Math.min(total - 1, current + 2); i++) {
+    pages.add(i);
+  }
+  const sorted = [...pages].sort((a, b) => a - b);
+  const result = [];
+  for (let i = 0; i < sorted.length; i++) {
+    if (i > 0 && sorted[i] - sorted[i - 1] > 1) result.push('...');
+    result.push(sorted[i]);
+  }
+  return result;
+}
+
 export default function AdminAnalises() {
   const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [resultado, setResultado] = useState('');
   const [busca, setBusca] = useState('');
-
-  const fetchData = () => {
-    const params = { page };
-    if (resultado) params.resultado = resultado;
-    if (busca) params.busca = busca;
-    adminAnalises(params).then((res) => setData(res.data));
-  };
+  // Separar o valor digitado da busca efetivamente aplicada
+  // evita stale closure e disparo a cada keystroke
+  const [buscaAplicada, setBuscaAplicada] = useState('');
 
   useEffect(() => {
-    fetchData();
-  }, [page, resultado]);
+    setError(null);
+    const params = { page };
+    if (resultado) params.resultado = resultado;
+    if (buscaAplicada) params.busca = buscaAplicada;
+    adminAnalises(params)
+      .then((res) => setData(res.data))
+      .catch(() => setError('Erro ao carregar análises.'));
+  }, [page, resultado, buscaAplicada]);
 
   const handleSearch = (e) => {
     e.preventDefault();
     setPage(1);
-    fetchData();
+    setBuscaAplicada(busca);
   };
 
+  if (error) return <div className="loading">{error}</div>;
   if (!data) return <div className="loading">Carregando...</div>;
 
   return (
@@ -88,11 +106,11 @@ export default function AdminAnalises() {
       {data.total_pages > 1 && (
         <div className="pagination">
           <button disabled={page <= 1} onClick={() => setPage(page - 1)}>Anterior</button>
-          {Array.from({ length: data.total_pages }, (_, i) => i + 1).map((p) => (
-            <button key={p} className={p === page ? 'active' : ''} onClick={() => setPage(p)}>
-              {p}
-            </button>
-          ))}
+          {getPageNumbers(page, data.total_pages).map((p, i) =>
+            p === '...'
+              ? <span key={`ellipsis-${i}`} style={{ padding: '0 4px', color: 'var(--text-muted)' }}>…</span>
+              : <button key={p} className={p === page ? 'active' : ''} onClick={() => setPage(p)}>{p}</button>
+          )}
           <button disabled={page >= data.total_pages} onClick={() => setPage(page + 1)}>Próximo</button>
         </div>
       )}

@@ -1,17 +1,36 @@
 import { useState, useEffect } from 'react';
 import { adminLogs } from '../../services/api';
 
+function getPageNumbers(current, total) {
+  const pages = new Set([1, total]);
+  for (let i = Math.max(2, current - 2); i <= Math.min(total - 1, current + 2); i++) {
+    pages.add(i);
+  }
+  const sorted = [...pages].sort((a, b) => a - b);
+  const result = [];
+  for (let i = 0; i < sorted.length; i++) {
+    if (i > 0 && sorted[i] - sorted[i - 1] > 1) result.push('...');
+    result.push(sorted[i]);
+  }
+  return result;
+}
+
 export default function AdminLogs() {
   const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [metodo, setMetodo] = useState('');
 
   useEffect(() => {
+    setError(null);
     const params = { page };
     if (metodo) params.metodo = metodo;
-    adminLogs(params).then((res) => setData(res.data));
+    adminLogs(params)
+      .then((res) => setData(res.data))
+      .catch(() => setError('Erro ao carregar logs.'));
   }, [page, metodo]);
 
+  if (error) return <div className="loading">{error}</div>;
   if (!data) return <div className="loading">Carregando...</div>;
 
   return (
@@ -61,11 +80,11 @@ export default function AdminLogs() {
       {data.total_pages > 1 && (
         <div className="pagination">
           <button disabled={page <= 1} onClick={() => setPage(page - 1)}>Anterior</button>
-          {Array.from({ length: Math.min(data.total_pages, 10) }, (_, i) => i + 1).map((p) => (
-            <button key={p} className={p === page ? 'active' : ''} onClick={() => setPage(p)}>
-              {p}
-            </button>
-          ))}
+          {getPageNumbers(page, data.total_pages).map((p, i) =>
+            p === '...'
+              ? <span key={`ellipsis-${i}`} style={{ padding: '0 4px', color: 'var(--text-muted)' }}>…</span>
+              : <button key={p} className={p === page ? 'active' : ''} onClick={() => setPage(p)}>{p}</button>
+          )}
           <button disabled={page >= data.total_pages} onClick={() => setPage(page + 1)}>Próximo</button>
         </div>
       )}

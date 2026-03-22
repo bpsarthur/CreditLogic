@@ -4,18 +4,18 @@ from .models import Analise, AcessoLog
 
 class AnaliseInputSerializer(serializers.Serializer):
     nome_solicitante = serializers.CharField(max_length=200)
-    p1 = serializers.BooleanField(default=False)
-    p2 = serializers.BooleanField(default=False)
-    p3 = serializers.BooleanField(default=False)
-    p4 = serializers.BooleanField(default=False)
-    p5 = serializers.BooleanField(default=False)
-    p6 = serializers.BooleanField(default=False)
-    p7 = serializers.BooleanField(default=False)
-    p8 = serializers.BooleanField(default=False)
-    p9 = serializers.BooleanField(default=False)
-    p10 = serializers.BooleanField(default=False)
-    p11 = serializers.BooleanField(default=False)
-    p12 = serializers.BooleanField(default=False)
+    p1 = serializers.BooleanField()
+    p2 = serializers.BooleanField()
+    p3 = serializers.BooleanField()
+    p4 = serializers.BooleanField()
+    p5 = serializers.BooleanField()
+    p6 = serializers.BooleanField()
+    p7 = serializers.BooleanField()
+    p8 = serializers.BooleanField()
+    p9 = serializers.BooleanField()
+    p10 = serializers.BooleanField()
+    p11 = serializers.BooleanField()
+    p12 = serializers.BooleanField()
 
 
 class AnaliseSerializer(serializers.ModelSerializer):

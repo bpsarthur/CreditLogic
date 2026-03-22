@@ -6,11 +6,15 @@ const COLORS = { aprovado: '#3fb950', reprovado: '#f85149', accent: '#58a6ff' };
 
 export default function AdminStats() {
   const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    adminStats().then((res) => setData(res.data));
+    adminStats()
+      .then((res) => setData(res.data))
+      .catch(() => setError('Erro ao carregar estatísticas.'));
   }, []);
 
+  if (error) return <div className="loading">{error}</div>;
   if (!data) return <div className="loading">Carregando...</div>;
 
   const pieData = [

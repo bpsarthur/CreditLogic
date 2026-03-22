@@ -1,4 +1,5 @@
 import json
+import functools
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
@@ -13,6 +14,7 @@ ADMIN_PASS = "creditlogic2026"
 
 
 def admin_required(view_func):
+    @functools.wraps(view_func)
     def wrapper(request, *args, **kwargs):
         if not request.session.get("admin_logged_in"):
             return JsonResponse({"error": "Não autorizado"}, status=401)
@@ -60,7 +62,7 @@ def admin_dashboard(request):
     reprovados = Analise.objects.filter(resultado="REPROVADO").count()
     taxa_aprovacao = round((aprovados / total * 100), 1) if total > 0 else 0
 
-    ultimas = Analise.objects.all()[:5]
+    ultimas = Analise.objects.order_by("-criado_em")[:5]
 
     return JsonResponse({
         "total_analises": total,
@@ -84,8 +86,12 @@ def admin_analises(request):
     if busca:
         queryset = queryset.filter(nome_solicitante__icontains=busca)
 
-    page = int(request.GET.get("page", 1))
-    page_size = int(request.GET.get("page_size", 20))
+    try:
+        page = max(1, int(request.GET.get("page", 1)))
+        page_size = min(100, max(1, int(request.GET.get("page_size", 20))))
+    except (ValueError, TypeError):
+        return JsonResponse({"error": "Parâmetros de paginação inválidos"}, status=400)
+
     total = queryset.count()
     start = (page - 1) * page_size
     end = start + page_size
@@ -97,7 +103,7 @@ def admin_analises(request):
         "total": total,
         "page": page,
         "page_size": page_size,
-        "total_pages": (total + page_size - 1) // page_size,
+        "total_pages": (total + page_size - 1) // page_size if total > 0 else 1,
     })
 
 
@@ -110,8 +116,12 @@ def admin_logs(request):
     if metodo:
         queryset = queryset.filter(metodo_http=metodo)
 
-    page = int(request.GET.get("page", 1))
-    page_size = int(request.GET.get("page_size", 20))
+    try:
+        page = max(1, int(request.GET.get("page", 1)))
+        page_size = min(100, max(1, int(request.GET.get("page_size", 20))))
+    except (ValueError, TypeError):
+        return JsonResponse({"error": "Parâmetros de paginação inválidos"}, status=400)
+
     total = queryset.count()
     start = (page - 1) * page_size
     end = start + page_size
@@ -123,7 +133,7 @@ def admin_logs(request):
         "total": total,
         "page": page,
         "page_size": page_size,
-        "total_pages": (total + page_size - 1) // page_size,
+        "total_pages": (total + page_size - 1) // page_size if total > 0 else 1,
     })
 
 

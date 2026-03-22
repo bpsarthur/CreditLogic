@@ -1,8 +1,18 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { adminLogout } from '../services/api';
 
 export default function Navbar() {
   const location = useLocation();
-  const isAdmin = location.pathname.startsWith('/admin');
+  const navigate = useNavigate();
+  const isAdmin = location.pathname.startsWith('/admin') && location.pathname !== '/admin/login';
+
+  const handleLogout = async () => {
+    try {
+      await adminLogout();
+    } finally {
+      navigate('/admin/login');
+    }
+  };
 
   return (
     <nav className="navbar">
@@ -30,6 +40,9 @@ export default function Navbar() {
             <Link to="/admin/stats" className={location.pathname === '/admin/stats' ? 'active' : ''}>
               Estatísticas
             </Link>
+            <button onClick={handleLogout} className="btn btn-danger" style={{ padding: '4px 12px', fontSize: '0.875rem' }}>
+              Sair
+            </button>
           </>
         ) : (
           <Link to="/admin" className={location.pathname.startsWith('/admin') ? 'active' : ''}>

@@ -3,11 +3,15 @@ import { adminDashboard } from '../../services/api';
 
 export default function AdminDashboard() {
   const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    adminDashboard().then((res) => setData(res.data));
+    adminDashboard()
+      .then((res) => setData(res.data))
+      .catch(() => setError('Erro ao carregar dashboard.'));
   }, []);
 
+  if (error) return <div className="loading">{error}</div>;
   if (!data) return <div className="loading">Carregando...</div>;
 
   return (
