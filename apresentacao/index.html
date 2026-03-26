@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreditLogic - Apresentacao</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- SLIDE 1 - Capa -->
+    <section class="slide active" id="slide-0">
+        <div class="slide-content capa">
+            <div class="logo-icon">&#9878;</div>
+            <h1>CreditLogic</h1>
+            <p class="subtitle">Motor de Decisao de Credito baseado em Logica Proposicional</p>
+            <div class="divider"></div>
+            <p class="info">Projeto Academico &bull; 2026</p>
+            <p class="info">Arthur Berti Petersen Scholze</p>
+        </div>
+    </section>
+
+    <!-- SLIDE 2 - O que e o CreditLogic? -->
+    <section class="slide" id="slide-1">
+        <div class="slide-content">
+            <h2>O que e o CreditLogic?</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">&#128176;</div>
+                    <h3>Simulador de Credito</h3>
+                    <p>Um sistema que decide se uma pessoa tem o credito <strong>aprovado</strong> ou <strong>reprovado</strong>, assim como bancos e financeiras fazem na vida real.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">&#129518;</div>
+                    <h3>Logica Proposicional</h3>
+                    <p>Utiliza <strong>12 proposicoes logicas</strong> (verdadeiro ou falso) para tomar a decisao. E basicamente uma <strong>tabela verdade gigante</strong> aplicada na pratica.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">&#128202;</div>
+                    <h3>Painel Administrativo</h3>
+                    <p>Possui um dashboard completo com <strong>graficos, estatisticas e logs</strong> para o administrador acompanhar todas as analises realizadas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 3 - Como funciona? -->
+    <section class="slide" id="slide-2">
+        <div class="slide-content">
+            <h2>Como funciona na pratica?</h2>
+            <div class="flow">
+                <div class="flow-step">
+                    <div class="step-number">1</div>
+                    <p>O usuario preenche um formulario com 12 perguntas sobre sua situacao financeira</p>
+                </div>
+                <div class="flow-arrow">&#10140;</div>
+                <div class="flow-step">
+                    <div class="step-number">2</div>
+                    <p>O sistema avalia as respostas usando a formula logica</p>
+                </div>
+                <div class="flow-arrow">&#10140;</div>
+                <div class="flow-step">
+                    <div class="step-number">3</div>
+                    <p>Resultado: <span class="badge-green">APROVADO</span> ou <span class="badge-red">REPROVADO</span></p>
+                </div>
+            </div>
+            <div class="formula-box">
+                <h4>Formula de Decisao</h4>
+                <code>(P1 &and; P2 &and; P3 &and; P6 &and; P12) &and; (total_verdadeiros &ge; 8)</code>
+                <p class="formula-desc">As 5 proposicoes obrigatorias devem ser verdadeiras <strong>E</strong> pelo menos 8 das 12 no total.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 4 - Stack Backend -->
+    <section class="slide" id="slide-3">
+        <div class="slide-content">
+            <h2>Stack Tecnologica &mdash; Backend</h2>
+            <p class="section-subtitle">O "cerebro" da aplicacao &mdash; o que roda por tras</p>
+            <div class="tech-list">
+                <div class="tech-item">
+                    <div class="tech-icon python">Py</div>
+                    <div>
+                        <h3>Python</h3>
+                        <p>A linguagem de programacao usada no servidor. E como o <strong>idioma</strong> que o computador entende pra executar as regras de credito.</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon django">Dj</div>
+                    <div>
+                        <h3>Django</h3>
+                        <p>Um framework (conjunto de ferramentas prontas) que facilita criar o servidor web. Imagina como um <strong>kit de construcao LEGO</strong> pra montar o backend rapido.</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon drf">API</div>
+                    <div>
+                        <h3>Django REST Framework</h3>
+                        <p>Extensao do Django que cria as <strong>APIs</strong> &mdash; os "canais de comunicacao" entre o frontend e o backend. E como um <strong>garcom</strong> levando pedidos da mesa pra cozinha.</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon sqlite">DB</div>
+                    <div>
+                        <h3>SQLite</h3>
+                        <p>O banco de dados. E onde ficam salvas todas as analises de credito. Pense nele como uma <strong>planilha do Excel automatizada</strong> que guarda tudo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 5 - Stack Frontend -->
+    <section class="slide" id="slide-4">
+        <div class="slide-content">
+            <h2>Stack Tecnologica &mdash; Frontend</h2>
+            <p class="section-subtitle">A "cara" da aplicacao &mdash; o que o usuario ve e clica</p>
+            <div class="tech-list">
+                <div class="tech-item">
+                    <div class="tech-icon react">Re</div>
+                    <div>
+                        <h3>React</h3>
+                        <p>Biblioteca do Facebook pra construir interfaces. E o que faz os botoes, formularios e paginas funcionarem. Imagina como os <strong>tijolos</strong> que montam a tela.</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon vite">Vi</div>
+                    <div>
+                        <h3>Vite</h3>
+                        <p>Ferramenta que empacota e serve o codigo React. E como um <strong>forno turbo</strong> &mdash; compila tudo muito rapido pra voce ver as mudancas na hora.</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon axios">Ax</div>
+                    <div>
+                        <h3>Axios</h3>
+                        <p>Biblioteca que faz as requisicoes HTTP. E o <strong>carteiro</strong> que leva os dados do formulario ate o servidor e traz a resposta de volta.</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon recharts">Ch</div>
+                    <div>
+                        <h3>Recharts</h3>
+                        <p>Gera os graficos bonitos do painel admin. Transforma numeros chatos em <strong>graficos de pizza, barras e linhas</strong> visuais.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 6 - Por que essas tecnologias? -->
+    <section class="slide" id="slide-5">
+        <div class="slide-content">
+            <h2>Por que essas tecnologias?</h2>
+            <div class="reasons-grid">
+                <div class="reason">
+                    <h3>&#9889; Django + DRF</h3>
+                    <p>Rapido de desenvolver, seguro por padrao, e o ecossistema Python e gigante.</p>
+                </div>
+                <div class="reason">
+                    <h3>&#9881; React + Vite</h3>
+                    <p>Padrao da industria pra interfaces modernas. Componentes reutilizaveis e performance excelente.</p>
+                </div>
+                <div class="reason">
+                    <h3>&#128230; SQLite</h3>
+                    <p>Zero configuracao, perfeito pra projetos que nao precisam de um servidor de banco dedicado.</p>
+                </div>
+                <div class="reason">
+                    <h3>&#128200; Recharts</h3>
+                    <p>Graficos profissionais com poucas linhas de codigo. Integra nativamente com React.</p>
+                </div>
+            </div>
+            <div class="bazooka-box">
+                <div class="bazooka-icon">&#128163;</div>
+                <h3>Tiro de Bazuca em Formiga</h3>
+                <p>Vamos ser sinceros: usar <strong>Django REST Framework + React + Vite</strong> pra um projeto de faculdade e como usar um <strong>canhao pra matar um mosquito</strong>.</p>
+                <p>Essa stack e usada por empresas como <strong>Instagram, Netflix e Airbnb</strong>. Nos usamos pra avaliar 12 perguntas de sim ou nao.</p>
+                <p>Um simples formulario em HTML puro com um script de 50 linhas resolveria. Mas onde estaria a graca nisso? <strong>Fizemos por que podemos.</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 7 - Arquitetura -->
+    <section class="slide" id="slide-6">
+        <div class="slide-content">
+            <h2>Arquitetura do Sistema</h2>
+            <div class="architecture">
+                <div class="arch-layer">
+                    <div class="arch-box frontend-box">
+                        <h3>Frontend (React)</h3>
+                        <p>Interface do usuario</p>
+                        <span class="port">:5173</span>
+                    </div>
+                </div>
+                <div class="arch-arrow">&#8595; Axios (JSON) &#8595;</div>
+                <div class="arch-layer">
+                    <div class="arch-box backend-box">
+                        <h3>Backend (Django)</h3>
+                        <p>API REST + Logica</p>
+                        <span class="port">:8000</span>
+                    </div>
+                </div>
+                <div class="arch-arrow">&#8595; ORM &#8595;</div>
+                <div class="arch-layer">
+                    <div class="arch-box db-box">
+                        <h3>SQLite</h3>
+                        <p>Banco de Dados</p>
+                        <span class="port">db.sqlite3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 8 - Encerramento -->
+    <section class="slide" id="slide-7">
+        <div class="slide-content capa">
+            <h2>Obrigado!</h2>
+            <div class="divider"></div>
+            <p class="subtitle">O CreditLogic demonstra como logica proposicional pode ser aplicada em cenarios reais de decisao de credito, unindo teoria academica com tecnologia de ponta.</p>
+            <br>
+            <p class="info" style="opacity: 0.6;">Duvidas? Vamos conversar!</p>
+        </div>
+    </section>
+
+    <!-- SLIDE 9 - Sobre o Autor -->
+    <section class="slide" id="slide-8">
+        <div class="slide-content">
+            <h2>Sobre o Autor</h2>
+            <div class="author-card">
+                <div class="author-avatar">APS</div>
+                <h3>Arthur Berti Petersen Scholze</h3>
+                <p class="author-location">Cruz Alta, Rio Grande do Sul, Brasil</p>
+                <div class="divider"></div>
+                <div class="badges-grid">
+                    <div class="badge-item cert">
+                        <span class="badge-label">CompTIA</span>
+                        <span class="badge-value">Pentest+</span>
+                    </div>
+                    <div class="badge-item cert">
+                        <span class="badge-label">CompTIA</span>
+                        <span class="badge-value">Security+</span>
+                    </div>
+                    <div class="badge-item rank">
+                        <span class="badge-label">TryHackMe</span>
+                        <span class="badge-value">Top 2% Mundial | #94 BR</span>
+                    </div>
+                    <div class="badge-item role">
+                        <span class="badge-label">Anthropic</span>
+                        <span class="badge-value">LLM & MCP Specialist</span>
+                    </div>
+                    <div class="badge-item role">
+                        <span class="badge-label">IPV7</span>
+                        <span class="badge-value">Cyber Threat Hunter & Investigator</span>
+                    </div>
+                    <div class="badge-item role">
+                        <span class="badge-label">AUVP</span>
+                        <span class="badge-value">Analista de Ciberseguranca Pleno</span>
+                    </div>
+                    <div class="badge-item highlight">
+                        <span class="badge-label">Atuacao</span>
+                        <span class="badge-value">SOC / PENTEST Pleno | Bug Hunter</span>
+                    </div>
+                </div>
+                <p class="author-summary">+4 anos de experiencia em ciberseguranca com historico comprovado em diversos setores. Entusiasta de Linux e Bug Hunter.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navegacao -->
+    <div class="nav-controls">
+        <button id="prevBtn" onclick="changeSlide(-1)">&#8592; Anterior</button>
+        <span id="slideCounter">1 / 9</span>
+        <button id="nextBtn" onclick="changeSlide(1)">Proximo &#8594;</button>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            slides[index].classList.add('active');
+            document.getElementById('slideCounter').textContent = `${index + 1} / ${totalSlides}`;
+            document.getElementById('progressFill').style.width = `${((index + 1) / totalSlides) * 100}%`;
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === totalSlides - 1;
+        }
+
+        function changeSlide(dir) {
+            currentSlide = Math.max(0, Math.min(totalSlides - 1, currentSlide + dir));
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>
